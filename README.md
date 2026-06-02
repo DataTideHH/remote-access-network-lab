@@ -83,13 +83,20 @@ remote-access-network-lab/
 │   ├── setup-notes.md
 │   └── troubleshooting.md
 ├── diagrams/
-│   └── .gitkeep
+│   ├── .gitkeep
+│   └── tailscale-topology.md
 ├── examples/
 │   ├── tailscale-status-example.txt
 │   └── wireguard-peer-example.conf
 ├── .gitignore
 └── LICENSE
 ```
+
+## Network diagram
+
+The anonymized Tailscale topology is documented here:
+
+- [Tailscale topology diagram](diagrams/tailscale-topology.md)
 
 ## Learning goals
 
