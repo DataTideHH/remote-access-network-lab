@@ -119,3 +119,11 @@ The following topics will be documented step by step:
 This is a learning and documentation project, not a production infrastructure template.
 
 The focus is on clear documentation, careful handling of sensitive information and practical understanding of remote access concepts.
+
+## Hardware used
+
+Hardware and operating system details are documented separately:
+
+- [Hardware and operating systems](docs/hardware.md)
+
+Sensitive identifiers such as device IDs, product IDs, serial numbers, public IP addresses and private hostnames are intentionally omitted.
