@@ -4,14 +4,44 @@
 
 Remote access must be useful, but it must not unnecessarily increase the attack surface of the home network or personal workstation.
 
+## Current security posture
+
+The current setup uses Tailscale as a private connectivity layer between trusted devices.
+
+No public router port forwarding was configured.
+
+The macOS workstation is reachable over Tailscale for SSH after Remote Login was enabled.
+
+## Features not enabled
+
+The following features were intentionally not enabled during the initial setup:
+
+- Exit Node
+- Subnet Router
+- Funnel
+- Serve
+- Tailscale SSH
+
+This keeps the initial lab small and easier to reason about.
+
+## macOS Remote Login
+
+macOS Remote Login was enabled for SSH testing.
+
+Access was limited to admin users.
+
+SSH is intended to be used only through the private Tailnet, not through public internet exposure.
+
 ## What will not be published
 
 This repository must never contain:
 
 - private keys
 - real public IP addresses
-- real device hostnames
-- VPN enrollment links
+- real private IP addresses
+- real Tailscale IP addresses
+- real SSH fingerprints
+- device enrollment links
 - QR codes
 - authentication tokens
 - screenshots with private account data
@@ -30,7 +60,7 @@ This repository must never contain:
 
 Running a VPN client is low risk when configured correctly.
 
-Running a public VPN server directly on a productive workstation is a higher operational responsibility. For a more professional setup, a separate gateway such as a router, Raspberry Pi, Linux VM or VPS may be preferable.
+Running a public VPN server directly on a productive workstation is a higher operational responsibility. For a more professional WireGuard setup, a separate gateway such as a router, Raspberry Pi, Linux VM or VPS may be preferable.
 
 ## Documentation rule
 
