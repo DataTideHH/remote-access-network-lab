@@ -15,8 +15,8 @@ This project is part of my DataTideHH learning portfolio and supports practical 
 The planned lab environment includes:
 
 - a macOS workstation used as a personal developer machine and intended always-on remote access target
-- a Windows 11 school desktop used for lab work, documentation, Git/GitHub workflow and Hyper-V tasks
-- a Windows 11 notebook used as a mobile school / training device and remote access client
+- a Windows 11 school desktop / BBQ OptiPlex Tower used for lab work, documentation, Git/GitHub workflow, Hyper-V and database-related school tasks
+- a Windows 11 ThinkPad used as a mobile school / training device and remote access client
 - optional mobile device access for basic connectivity checks
 - VPN-based remote access
 - no public secrets, private keys, real IP addresses or sensitive hostnames in this repository
