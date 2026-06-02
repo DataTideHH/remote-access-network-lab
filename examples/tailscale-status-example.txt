@@ -1,0 +1,15 @@
+# Example only - anonymized
+
+Sample status output placeholder.
+
+Device:
+  example-macos-workstation
+
+VPN address:
+  100.x.y.z
+
+Status:
+  online
+
+Notes:
+  This file is intentionally anonymized.

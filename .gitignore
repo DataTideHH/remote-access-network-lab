@@ -1,0 +1,32 @@
+# OS files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# Editor folders
+.vscode/
+.idea/
+
+# Secrets and private config
+*.key
+*.pem
+*.p12
+*.pfx
+*.mobileconfig
+*.conf.local
+*.env
+.env
+secrets/
+private/
+keys/
+
+# WireGuard / VPN real configs
+wg0.conf
+*.real.conf
+*.private.conf
+
+# Logs
+*.log
+
+# Screenshots with potentially sensitive data
+screenshots/private/
