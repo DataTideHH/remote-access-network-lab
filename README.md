@@ -127,3 +127,11 @@ Hardware and operating system details are documented separately:
 - [Hardware and operating systems](docs/hardware.md)
 
 Sensitive identifiers such as device IDs, product IDs, serial numbers, public IP addresses and private hostnames are intentionally omitted.
+
+## Hardware used
+
+Hardware and operating system details are documented separately:
+
+- [Hardware and operating systems](docs/hardware.md)
+
+Sensitive identifiers such as device IDs, product IDs, serial numbers, public IP addresses, private IP addresses, personal account names and real VPN addresses are intentionally omitted.
