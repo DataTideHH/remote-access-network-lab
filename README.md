@@ -14,8 +14,9 @@ This project is part of my DataTideHH learning portfolio and supports practical 
 
 The planned lab environment includes:
 
-- a macOS workstation used as a personal developer machine
-- a Windows 11 notebook used in a school / training context
+- a macOS workstation used as a personal developer machine and intended always-on remote access target
+- a Windows 11 school desktop used for lab work, documentation, Git/GitHub workflow and Hyper-V tasks
+- a Windows 11 notebook used as a mobile school / training device and remote access client
 - optional mobile device access for basic connectivity checks
 - VPN-based remote access
 - no public secrets, private keys, real IP addresses or sensitive hostnames in this repository
@@ -58,6 +59,7 @@ remote-access-network-lab/
 ├── README.md
 ├── docs/
 │   ├── architecture.md
+│   ├── hardware.md
 │   ├── security-considerations.md
 │   ├── setup-notes.md
 │   └── troubleshooting.md
@@ -79,6 +81,14 @@ remote-access-network-lab/
 - understand basic routing and access control concepts
 - avoid publishing secrets, keys, real public IP addresses or private infrastructure details
 - build a small but realistic networking portfolio project
+
+## Hardware used
+
+Hardware and operating system details are documented separately:
+
+- [Hardware and operating systems](docs/hardware.md)
+
+Sensitive identifiers such as device IDs, product IDs, serial numbers, public IP addresses, private IP addresses, personal account names and real VPN addresses are intentionally omitted.
 
 ## Security principles
 
@@ -119,19 +129,3 @@ The following topics will be documented step by step:
 This is a learning and documentation project, not a production infrastructure template.
 
 The focus is on clear documentation, careful handling of sensitive information and practical understanding of remote access concepts.
-
-## Hardware used
-
-Hardware and operating system details are documented separately:
-
-- [Hardware and operating systems](docs/hardware.md)
-
-Sensitive identifiers such as device IDs, product IDs, serial numbers, public IP addresses and private hostnames are intentionally omitted.
-
-## Hardware used
-
-Hardware and operating system details are documented separately:
-
-- [Hardware and operating systems](docs/hardware.md)
-
-Sensitive identifiers such as device IDs, product IDs, serial numbers, public IP addresses, private IP addresses, personal account names and real VPN addresses are intentionally omitted.
