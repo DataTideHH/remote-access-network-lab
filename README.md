@@ -78,6 +78,8 @@ remote-access-network-lab/
 ├── docs/
 │   ├── architecture.md
 │   ├── connection-tests.md
+│   ├── decision-records/
+│   │   └── 001-managed-mesh-vpn-baseline.md
 │   ├── hardware.md
 │   ├── portfolio-context.md
 │   ├── security-considerations.md
@@ -141,6 +143,7 @@ All example configurations are anonymized and non-functional by design.
 The following documents are included:
 
 - [Architecture](docs/architecture.md)
+- [Decision record: Managed mesh VPN baseline](docs/decision-records/001-managed-mesh-vpn-baseline.md)
 - [Hardware and operating systems](docs/hardware.md)
 - [Setup notes](docs/setup-notes.md)
 - [Connection tests](docs/connection-tests.md)
