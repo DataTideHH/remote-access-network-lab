@@ -79,9 +79,11 @@ remote-access-network-lab/
 │   ├── architecture.md
 │   ├── connection-tests.md
 │   ├── hardware.md
+│   ├── portfolio-context.md
 │   ├── security-considerations.md
 │   ├── setup-notes.md
-│   └── troubleshooting.md
+│   ├── troubleshooting.md
+│   └── validation-checklist.md
 ├── diagrams/
 │   ├── .gitkeep
 │   └── tailscale-topology.md
@@ -144,6 +146,17 @@ The following documents are included:
 - [Connection tests](docs/connection-tests.md)
 - [Security considerations](docs/security-considerations.md)
 - [Troubleshooting](docs/troubleshooting.md)
+- [Portfolio context](docs/portfolio-context.md)
+- [Validation checklist](docs/validation-checklist.md)
+
+## Portfolio and validation
+
+This repository is intentionally scoped as a small, documented learning lab rather than a production infrastructure template.
+
+Additional context and review criteria are documented here:
+
+- [Portfolio context](docs/portfolio-context.md)
+- [Validation checklist](docs/validation-checklist.md)
 
 ## Notes
 
