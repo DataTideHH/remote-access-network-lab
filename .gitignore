@@ -7,26 +7,51 @@ desktop.ini
 .vscode/
 .idea/
 
-# Secrets and private config
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Secrets and private configuration
 *.key
 *.pem
 *.p12
 *.pfx
 *.mobileconfig
-*.conf.local
 *.env
 .env
 secrets/
 private/
 keys/
 
-# WireGuard / VPN real configs
+# Authentication and enrollment artifacts
+*.authkey
+*.tskey
+*enrollment*.txt
+*enrollment*.png
+*qr-code*.png
+
+# Real WireGuard and VPN configurations
 wg0.conf
 *.real.conf
 *.private.conf
+*.conf.local
 
-# Logs
+# Private Tailscale policy and exports
+policy.hujson
+tailnet-policy.hujson
+tailscale-policy.hujson
+tailnet-export*.json
+tailscale-export*.json
+machines-export*.csv
+
+# Raw command output and logs
 *.log
+raw-output/
+connection-test-output/
+admin-console-export/
 
 # Screenshots with potentially sensitive data
 screenshots/private/
+screenshots/raw/
