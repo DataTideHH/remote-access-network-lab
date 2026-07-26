@@ -1,81 +1,139 @@
-# remote-access-network-lab
+# Remote Access Network Lab
 
-Documented VPN and remote access learning lab for Windows, macOS and mobile devices.
+Documented, public-safe remote-access learning lab for macOS, Windows and mobile clients.
 
 ## Purpose
 
-This repository documents a small, security-conscious remote access lab.
+This repository documents how trusted devices can reach a personal workstation through a private mesh VPN without exposing SSH or other services directly to the public internet.
 
-The goal is to understand and document how trusted devices can securely reach a personal workstation without exposing unnecessary services directly to the public internet.
+The project supports practical learning in:
 
-This project is part of my DataTideHH learning portfolio and supports practical learning in networking, VPN concepts, secure remote access, troubleshooting and technical documentation.
+- VPN and remote-access concepts
+- device roles and trust boundaries
+- SSH over a private network path
+- access-control design
+- device lifecycle and offboarding
+- troubleshooting and technical documentation
+- safe publication of infrastructure work
 
-## Lab context
+It is a small learning lab, not a production VPN template or an enterprise zero-trust implementation.
 
-The lab environment includes:
+## Current verified baseline
 
-- a macOS workstation used as a personal developer machine and intended always-on remote access target
-- a Windows 11 school desktop / BBQ OptiPlex Tower used for lab work, documentation, Git/GitHub workflow, Hyper-V and database-related school tasks
-- a Windows 11 ThinkPad used as a mobile school / training device and remote access client
-- an iPhone 12 Pro Max used as an optional mobile validation client
-- VPN-based remote access using Tailscale
-- no public secrets, private keys, real IP addresses or sensitive hostnames in this repository
+Last validated: **June 2026**.
 
-## Current implementation status
+The implemented baseline uses Tailscale as a managed mesh VPN:
 
-The initial Tailscale-based remote access baseline has been tested successfully.
+- a personal macOS workstation is the primary remote-access target when powered on, signed in and available
+- an institution-managed Windows notebook was used as the tested SSH client
+- an institution-managed Windows desktop and an iPhone were enrolled for selected reachability and visibility checks
+- enrolled devices were visible in the Tailnet during the recorded test period
+- selected device-to-device reachability was verified
+- native macOS SSH from the Windows notebook to the macOS workstation over Tailscale was tested successfully
+- no public router port forwarding was configured
+- Exit Node, Subnet Router, Funnel, Serve and Tailscale SSH were not enabled
 
-Current state:
+The recorded tests do not claim permanent availability, unrestricted communication between every device pair or a continuously monitored service.
 
-- Tailscale is installed on the macOS workstation, the BBQ OptiPlex Tower, the BBQ ThinkPad X1 and the iPhone 12 Pro Max.
-- All initially intended devices are enrolled in the same Tailnet.
-- All devices can see and communicate with each other.
-- SSH from the Windows ThinkPad to the macOS workstation over Tailscale was tested successfully.
-- No public port forwarding was configured.
-- No exit node, subnet router, Funnel, Serve or Tailscale SSH feature was enabled.
+## Access-control status
 
-Real Tailscale IP addresses, SSH fingerprints, local network addresses and account-specific details are intentionally omitted.
+The repository documents a least-privilege target model, but it does not publish or claim the exact private Tailnet policy currently in use.
 
-## Planned approaches
+The intended access path is deliberately narrow:
 
-This lab documents two approaches.
+```text
+institution-managed Windows client
+                |
+                | TCP 22 over Tailscale
+                v
+personal macOS remote-access target
+```
 
-### 1. Managed mesh VPN approach
+The target model does not require:
 
-A managed mesh VPN solution such as Tailscale provides practical remote access with less operational overhead.
+- general client-to-client access
+- access to unrelated personal devices
+- subnet routing
+- exit-node routing
+- public service exposure
 
-This approach is useful for:
+See [Access-control model](docs/access-control-model.md) and the non-functional [example policy](examples/tailnet-policy.example.hujson).
 
-- simple device enrollment
-- NAT traversal without manual router port forwarding
-- controlled access between trusted devices
-- day-to-day remote access with low maintenance effort
-- avoiding direct exposure of SSH or other services to the public internet
+## Device trust and lifecycle
 
-This is the practical approach used for the current working lab baseline.
+Institution-managed school devices are temporary clients, not permanently trusted personal infrastructure. Their use is conditional on organizational permission and continued need.
 
-### 2. Self-managed WireGuard lab
+They should be reviewed and removed from the Tailnet when:
 
-WireGuard is included as a technical learning path.
+- the device is returned or reassigned
+- remote access is no longer required
+- authorization changes
+- the device is lost, compromised or no longer managed as expected
 
-This approach is useful for understanding:
+The documented review includes device approval, key expiry, client updates and offboarding. No real device IDs, hostnames, Tailnet names, account names or authentication material are published.
 
-- peers
-- public and private keys
-- AllowedIPs
-- endpoints
+## SSH model
+
+The tested path uses the native macOS OpenSSH service over Tailscale connectivity. Tailscale SSH is not enabled.
+
+Public documentation records only:
+
+- the source and target roles
+- the service and transport path
+- the result of the test
+- the access boundary
+
+It does not publish usernames, public keys, fingerprints, passwords or the exact private authentication configuration. A future hardening change should prefer a narrowly authorized account and key-based authentication where practical, but this repository does not claim that such a change has already been implemented.
+
+## Managed mesh VPN and WireGuard
+
+### Current practical baseline
+
+Tailscale is used because it provides private device-to-device connectivity and NAT traversal without public router port forwarding or the operational burden of running a public VPN server on the productive workstation.
+
+### Separate learning path
+
+WireGuard remains a conceptual learning path for:
+
+- peers and key pairs
+- `AllowedIPs`
+- endpoint configuration
 - persistent keepalive
 - split tunnel versus full tunnel
 - routing and firewall implications
 
-The productive remote access setup uses the simpler managed approach, while the WireGuard part is treated as a technical learning lab.
+The example configuration is intentionally non-functional. No productive WireGuard server is claimed.
+
+## Public-safety boundary
+
+This repository must not contain:
+
+- private keys or authentication tokens
+- device enrollment links or QR codes
+- real public, private or Tailscale IP addresses
+- real hostnames or device-management identifiers
+- account names or email addresses used for access control
+- SSH fingerprints or authorized-key material
+- private Tailnet policy exports
+- screenshots containing account, device or infrastructure details
+- complete internal network topology
+
+The repository includes a small Python validation script and GitHub Actions workflow that check for selected high-risk patterns and required public-safety artifacts.
+
+Run locally:
+
+```bash
+python scripts/validate_public_repository.py
+```
 
 ## Repository structure
 
 ```text
 remote-access-network-lab/
+├── .github/workflows/ci.yml
 ├── README.md
 ├── docs/
+│   ├── access-control-model.md
 │   ├── architecture.md
 │   ├── connection-tests.md
 │   ├── decision-records/
@@ -87,82 +145,42 @@ remote-access-network-lab/
 │   ├── troubleshooting.md
 │   └── validation-checklist.md
 ├── diagrams/
-│   ├── .gitkeep
 │   └── tailscale-topology.md
 ├── examples/
+│   ├── tailnet-policy.example.hujson
 │   ├── tailscale-status-example.txt
 │   └── wireguard-peer-example.conf
+├── scripts/
+│   └── validate_public_repository.py
 ├── .gitignore
 └── LICENSE
 ```
 
-## Network diagram
-
-The anonymized Tailscale topology is documented here:
-
-- [Tailscale topology diagram](diagrams/tailscale-topology.md)
-
-## Learning goals
-
-- understand VPN-based remote access
-- compare managed mesh VPN and self-managed VPN approaches
-- document a small network architecture clearly
-- practice security-aware configuration documentation
-- understand basic routing and access control concepts
-- use SSH over a private VPN instead of exposing SSH publicly
-- avoid publishing secrets, keys, real public IP addresses or private infrastructure details
-- build a small but realistic networking portfolio project
-
-## Hardware used
-
-Hardware and operating system details are documented separately:
-
-- [Hardware and operating systems](docs/hardware.md)
-
-Sensitive identifiers such as device IDs, product IDs, serial numbers, public IP addresses, private IP addresses, real VPN addresses, SSH fingerprints and authentication material are intentionally omitted.
-
-## Security principles
-
-This repository intentionally does not contain:
-
-- private keys
-- real public IP addresses
-- real private IP addresses
-- real Tailscale IP addresses
-- real SSH fingerprints
-- VPN enrollment links
-- QR codes
-- authentication tokens
-- screenshots containing private account data
-- complete internal network details
-
-All example configurations are anonymized and non-functional by design.
-
 ## Documentation
 
-The following documents are included:
-
 - [Architecture](docs/architecture.md)
-- [Decision record: Managed mesh VPN baseline](docs/decision-records/001-managed-mesh-vpn-baseline.md)
-- [Hardware and operating systems](docs/hardware.md)
+- [Access-control model](docs/access-control-model.md)
+- [Decision record: managed mesh VPN baseline](docs/decision-records/001-managed-mesh-vpn-baseline.md)
+- [Hardware and operating-system roles](docs/hardware.md)
 - [Setup notes](docs/setup-notes.md)
 - [Connection tests](docs/connection-tests.md)
 - [Security considerations](docs/security-considerations.md)
 - [Troubleshooting](docs/troubleshooting.md)
 - [Portfolio context](docs/portfolio-context.md)
 - [Validation checklist](docs/validation-checklist.md)
+- [Anonymized topology](diagrams/tailscale-topology.md)
 
-## Portfolio and validation
+## Current maturity and next review
 
-This repository is intentionally scoped as a small, documented learning lab rather than a production infrastructure template.
+Current maturity: **documented working baseline with explicit public-safety and access-control boundaries**.
 
-Additional context and review criteria are documented here:
+The next meaningful change should be based on a real review trigger, such as:
 
-- [Portfolio context](docs/portfolio-context.md)
-- [Validation checklist](docs/validation-checklist.md)
+- a new authorized client role
+- a verified private least-privilege policy change
+- a dedicated gateway or lab host
+- subnet routing or exit-node evaluation
+- a new dated connection test
+- retirement or return of an institution-managed device
 
-## Notes
-
-This is a learning and documentation project, not a production infrastructure template.
-
-The focus is on clear documentation, careful handling of sensitive information and practical understanding of remote access concepts.
+Complexity should not be added solely to make the repository look larger.
