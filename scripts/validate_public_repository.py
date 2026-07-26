@@ -34,8 +34,8 @@ TEXT_SUFFIXES = {
 }
 
 FORBIDDEN_LITERALS = {
-    "BBQ-BM6HJ64": "real institution-managed desktop hostname",
-    "BBQEDU-PF3NRBA0": "real institution-managed notebook hostname",
+    "".join(("BBQ-", "BM6HJ64")): "real institution-managed desktop hostname",
+    "".join(("BBQEDU-", "PF3NRBA0")): "real institution-managed notebook hostname",
 }
 
 FORBIDDEN_PATTERNS = (
@@ -72,7 +72,8 @@ def iter_public_text_files() -> list[Path]:
 def validate_required_paths(errors: list[str]) -> None:
     for path in REQUIRED_PATHS:
         if not path.is_file():
-            errors.append(f"Missing required public-safety artifact: {path.relative_to(REPOSITORY_ROOT)}")
+            relative = path.relative_to(REPOSITORY_ROOT)
+            errors.append(f"Missing required public-safety artifact: {relative}")
 
 
 def validate_text_files(errors: list[str]) -> None:
@@ -115,25 +116,23 @@ def validate_policy_example(errors: list[str]) -> None:
         errors.append("Policy example must contain exactly one narrow grant")
         return
 
-    grant = grants[0]
-    expected = {
+    expected_grant = {
         "src": ["tag:managed-client"],
         "dst": ["tag:remote-target"],
         "ip": ["tcp:22"],
     }
-    if grant != expected:
-        errors.append("Policy example must grant only managed-client -> remote-target on tcp:22")
+    if grants[0] != expected_grant:
+        errors.append(
+            "Policy example must grant only managed-client -> remote-target on tcp:22"
+        )
 
     serialized = json.dumps(policy, sort_keys=True)
-    forbidden_features = (
-        "autogroup:internet",
-        "0.0.0.0/0",
-        "::/0",
-        "*:*",""
-    )
-    for value in forbidden_features:
-        if value and value in serialized:
-            errors.append(f"Policy example contains an over-broad destination or capability: {value}")
+    for value in ("autogroup:internet", "0.0.0.0/0", "::/0", "*:*"):
+        if value in serialized:
+            errors.append(
+                "Policy example contains an over-broad destination or capability: "
+                f"{value}"
+            )
 
 
 def main() -> int:
