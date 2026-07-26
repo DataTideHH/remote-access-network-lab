@@ -11,7 +11,8 @@ import re
 from pathlib import Path
 
 
-REPOSITORY_ROOT = Path(__file__).resolve().parents[1]
+VALIDATOR_PATH = Path(__file__).resolve()
+REPOSITORY_ROOT = VALIDATOR_PATH.parents[1]
 POLICY_EXAMPLE = REPOSITORY_ROOT / "examples" / "tailnet-policy.example.hujson"
 
 REQUIRED_PATHS = (
@@ -63,6 +64,8 @@ def iter_public_text_files() -> list[Path]:
     files: list[Path] = []
     for path in REPOSITORY_ROOT.rglob("*"):
         if not path.is_file() or ".git" in path.parts:
+            continue
+        if path.resolve() == VALIDATOR_PATH:
             continue
         if path.name == ".gitignore" or path.suffix.lower() in TEXT_SUFFIXES:
             files.append(path)
