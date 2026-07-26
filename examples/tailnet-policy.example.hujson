@@ -1,0 +1,14 @@
+{
+  "tagOwners": {
+    "tag:remote-target": ["autogroup:admin"],
+    "tag:managed-client": ["autogroup:admin"],
+    "tag:mobile-validation": ["autogroup:admin"]
+  },
+  "grants": [
+    {
+      "src": ["tag:managed-client"],
+      "dst": ["tag:remote-target"],
+      "ip": ["tcp:22"]
+    }
+  ]
+}
